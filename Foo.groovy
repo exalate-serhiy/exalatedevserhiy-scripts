@@ -1,5 +1,5 @@
 class Foo {
     def doBar() {
-        throw new Exception("#doBar")
+        throw new Exception("#doBar2")
     }
 }
