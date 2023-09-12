@@ -1,1 +1,1 @@
-# exalatedevserhiy-scripts
+# Exalate scripts for exalatedevserhiy.atlassian.net
