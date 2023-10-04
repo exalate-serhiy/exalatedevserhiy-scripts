@@ -21,7 +21,7 @@ class SyncProjectPropertyService {
         //context.debug.error("headerValue=$headerValue")
         Map<String, Object> syncProperty = new JiraClient()
                 .http(
-                        "GET", "/rest/api/2/project/${projectIdOrKey}/property/sync".toString(),
+                        "GET", "/rest/api/2/project/${projectIdOrKey}/properties/sync".toString(),
                         [:],
                         null,
                         ["Authorization": [
@@ -29,7 +29,7 @@ class SyncProjectPropertyService {
                         ]]
                 ) { response ->
                     if (response.code >= 400) throw new com.exalate.api.exception.IssueTrackerException(
-                            "Failed to perform GET /rest/api/2/project/${projectIdOrKey}/property/sync : ${response.code} ${response.body}".toString()
+                            "Failed to perform GET /rest/api/2/project/${projectIdOrKey}/properties/sync : ${response.code} ${response.body}".toString()
                     )
                     else jsonSlurper.parseText(response.body)  as Map<String, Object>;
                 } as Map<String, Object>;
