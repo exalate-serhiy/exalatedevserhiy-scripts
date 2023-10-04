@@ -11,7 +11,7 @@ class AdoOut {
         BasicHubIssue workItem = context."workItem"
         BasicHubIssue replica = context."replica"
         def debug = context.debug
-        def nodeHelper = context.nodeHelper
+        def syncHelper = context.syncHelper
 
         IConnection connection = context.connection as IConnection
         IIssueKey issueKey = context.issueKey
@@ -26,7 +26,7 @@ class AdoOut {
 
 
         def getPreviousJson = {
-            def ttRepo = (nodeHelper).twinTraceRepositoryProvider.get()
+            def ttRepo = (syncHelper).twinTraceRepository
 //com.exalate.persistence.twintrace.TwinTraceRepository ttRepo = ((services.jcloud.hubobjects.NodeHelper)nodeHelper).twinTraceRepositoryProvider.get()
             def await = { f -> scala.concurrent.Await$.MODULE$.result(f, scala.concurrent.duration.Duration.apply(1, java.util.concurrent.TimeUnit.MINUTES)) }
             def orNull = { opt -> opt.isEmpty() ? null : opt.get() }
