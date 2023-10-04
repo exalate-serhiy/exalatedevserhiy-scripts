@@ -174,6 +174,7 @@ class JiraClient {
                                     ?.replace("ADMIN:", "")
                     ) :
                     none()
+            InjectorGetter.debug.error("#http $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
             response = await(await(httpClient.authenticate(
                     userOpt,
                     request,

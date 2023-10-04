@@ -14,4 +14,8 @@ class InjectorGetter {
         def context = syncScriptContextService.syncScriptContext
         context.httpClient
     }
+    static def getDebug() {
+        def context = syncScriptContextService.syncScriptContext
+        context.debug
+    }
 }
