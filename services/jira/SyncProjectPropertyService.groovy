@@ -17,14 +17,14 @@ class SyncProjectPropertyService {
 
     SyncProjectProperty getSyncProperty(String projectIdOrKey) {
         Map<String, Object> context = syncScriptContextService.syncScriptContext
-        def token = context.adminToken
+        def headerValue = context.userAuthorization
         Map<String, Object> syncProperty = new JiraClient()
                 .http(
                         "GET", "/project/${projectIdOrKey}/property/sync".toString(),
                         [:],
                         null,
                         ["Authorization": [
-                                "Basic ${("serhiy@exalate.com:"+token).bytes.encodeBase64().toString()}".toString()
+                                headerValue
                         ]]
                 ) { response ->
                     if (response.code >= 400) throw new com.exalate.api.exception.IssueTrackerException(
