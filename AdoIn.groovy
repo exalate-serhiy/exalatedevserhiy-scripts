@@ -10,6 +10,9 @@ class AdoIn {
     static Tuple2<IIssueKey, Seq<INonPersistentTrace>> receive() {
         def context = syncScriptContextService.syncScriptContext
         BasicHubIssue workItem = context."workItem"
+        def debug = context.debug
+
+        debug.error("#ado_in not implemented yet!")
 
         if (context.firstSync) {
             // figure out the project from the mapping.json
