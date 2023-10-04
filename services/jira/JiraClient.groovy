@@ -169,7 +169,7 @@ class JiraClient {
 
             def hasAdminImpersonation = headers.any(isImpersonationHeader)
             if (!hasAdminImpersonation && headers.containsKey("Authorization")) {
-                InjectorGetter.debug.error("#http #with-explicit-auth-header $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
+                //InjectorGetter.debug.error("#http #with-explicit-auth-header $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
                 response = await(request.execute())
             } else {
                 def userOpt = hasAdminImpersonation ?
@@ -179,7 +179,7 @@ class JiraClient {
                                         ?.replace("ADMIN:", "")
                         ) :
                         none()
-                InjectorGetter.debug.error("#http #without-explicit-auth-header $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
+                //InjectorGetter.debug.error("#http #without-explicit-auth-header $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
                 response = await(await(httpClient.authenticate(
                         userOpt,
                         request,
