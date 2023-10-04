@@ -11,6 +11,7 @@ class AdoOut {
         BasicHubIssue workItem = context."workItem"
         BasicHubIssue replica = context."replica"
         def debug = context.debug
+        def nodeHelper = context.nodeHelper
 
         IConnection connection = context.connection as IConnection
         IIssueKey issueKey = context.issueKey
