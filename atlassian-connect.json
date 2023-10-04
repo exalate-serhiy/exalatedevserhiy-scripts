@@ -4,7 +4,9 @@
   "description" : "Adds project.property[sync].active = \"true\" and project.property[sync].connection = \"A_to_B\" to JQL",
   "version" : "0.1.0",
   "scopes" : ["NONE"],
-  "authentication" : "NONE",
+  "authentication" : {
+    "type" : "NONE"
+  },
   "baseUrl" : "https://raw.githubusercontent.com/exalate-serhiy/exalatedevserhiy-scripts/main/",
   "modules" : {
     "jiraEntityProperties": [
