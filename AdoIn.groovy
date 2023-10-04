@@ -18,10 +18,13 @@ class AdoIn {
         //debug.error("#ado_in not implemented yet!")
 
         if (context.firstSync) {
+
+            // figure out the project from the mapping.json
             if (replica.targetProject) {
                 workItem.projectKey = replica.targetProject
             }
-            // figure out the project from the mapping.json
+
+            workItem.type = "Task"
         }
 
         workItem.description = replica.description

@@ -5,6 +5,11 @@
     },
     "ado_exalatedevserhiy" : {
       "project" : "ADO"
-    }
+    },
+    "statusMapping" : [
+      {
+        "jira_exalatedevserhiy" : "Task", "ado_exalatedevserhiy" : "Task"
+      }
+    ]
   }
 ]
