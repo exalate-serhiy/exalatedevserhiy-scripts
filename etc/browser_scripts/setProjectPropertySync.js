@@ -6,8 +6,8 @@ function setProjectPropertySync(projectIdOrKey, connection, active) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "connection" : connection || "",
-            "active" : active || "false"
+            "connection" : connection,
+            "active" : active === "true" ? "true" : "false"
         })
     })
         .then(response => {

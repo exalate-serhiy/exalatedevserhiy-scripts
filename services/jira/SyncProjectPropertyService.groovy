@@ -17,7 +17,7 @@ class SyncProjectPropertyService {
     SyncProjectProperty getSyncProperty(String projectIdOrKey) {
         Map<String, Object> context = syncScriptContextService.syncScriptContext
         PreparedHttpClient httpClient = context.httpClient
-        Map<String, Object> syncProperty = httpClient.get("project/${projectIdOrKey}/property/sync".toString()) as Map<String, Object>;
+        Map<String, Object> syncProperty = httpClient.get("/project/${projectIdOrKey}/property/sync".toString()) as Map<String, Object>;
         new SyncProjectProperty(
                 syncProperty."connection" as String,
                 syncProperty."active" as String
