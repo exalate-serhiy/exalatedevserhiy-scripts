@@ -34,10 +34,10 @@ class SyncProjectPropertyService {
                     )
                     else jsonSlurper.parseText(response.body)  as Map<String, Object>;
                 } as Map<String, Object>;
-        context.debug.error("syncProperty=$syncProperty syncProperty.\"active\"=${syncProperty."active"  as String}")
+        //context.debug.error("syncProperty=$syncProperty syncProperty.\"active\"=${syncProperty."active"  as String}")
         new SyncProjectProperty(
-                syncProperty."connection" as String,
-                syncProperty."active" as String
+                syncProperty.value?."connection" as String,
+                syncProperty.value?."active" as String
         )
     }
 }

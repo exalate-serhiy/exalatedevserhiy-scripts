@@ -12,7 +12,7 @@ enum Active {
     }
 
     static Active getOrDefault(String activeStr) {
-        InjectorGetter.debug.error("\"true\".equalsIgnoreCase(activeStr)=${"true".equalsIgnoreCase(activeStr)} activeStr=${activeStr}")
+        //InjectorGetter.debug.error("\"true\".equalsIgnoreCase(activeStr)=${"true".equalsIgnoreCase(activeStr)} activeStr=${activeStr}")
         if ("true".equalsIgnoreCase(activeStr)) {
             return TRUE
         } else {
