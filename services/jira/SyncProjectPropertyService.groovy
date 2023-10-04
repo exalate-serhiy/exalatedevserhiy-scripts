@@ -17,15 +17,16 @@ class SyncProjectPropertyService {
 
     SyncProjectProperty getSyncProperty(String projectIdOrKey) {
         Map<String, Object> context = syncScriptContextService.syncScriptContext
+        def token = context.adminToken
         Map<String, Object> syncProperty = new JiraClient()
                 .http(
                         "GET", "/project/${projectIdOrKey}/property/sync".toString(),
                         [:],
                         null,
-                        ["Authorization":["ADMIN:557058:71941f13-d5e0-46d8-9dfd-027bc4d8f6ce"]]
+                        ["Authorization": ["Basic ${("serhiy@exalate.com:"+token).bytes.encodeBase64().toString()}"]]
                 ) { response ->
                     if (response.code >= 400) throw new com.exalate.api.exception.IssueTrackerException(
-                            "Failed to perform impersonated GET /project/${projectIdOrKey}/property/sync : ${response.code} ${response.body}".toString()
+                            "Failed to perform GET /project/${projectIdOrKey}/property/sync : ${response.code} ${response.body}".toString()
                     )
                     else jsonSlurper.parseText(response.body)  as Map<String, Object>;
                 } as Map<String, Object>;
