@@ -9,14 +9,29 @@ class AdoIn {
     static final SyncScriptContextService syncScriptContextService = new SyncScriptContextService()
     static Tuple2<IIssueKey, Seq<INonPersistentTrace>> receive() {
         def context = syncScriptContextService.syncScriptContext
+        def commentHelper = context.commentHelper
+        def attachmentHelper = context.attachmentHelper
         BasicHubIssue workItem = context."workItem"
+        BasicHubIssue replica = context."replica"
         def debug = context.debug
 
-        debug.error("#ado_in not implemented yet!")
+        //debug.error("#ado_in not implemented yet!")
 
         if (context.firstSync) {
+            if (replica.targetProject) {
+                workItem.projectKey = replica.targetProject
+            }
             // figure out the project from the mapping.json
         }
+
+        workItem.description = replica.description
+
+        workItem.summary = replica.summary
+
+        workItem.comments  = commentHelper.mergeComments(workItem, replica)
+        workItem.attachments  = attachmentHelper.mergeAttachments(workItem, replica)
+
+
         // return the tuple if you'd like to ensure that no updates are made by Exalate after the script execution
         return null
     }
