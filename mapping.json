@@ -8,7 +8,8 @@
     },
     "statusMapping" : [
       {
-        "jira_exalatedevserhiy" : "Task", "ado_exalatedevserhiy" : "Task"
+        "jira_exalatedevserhiy" : "To Do", "ado_exalatedevserhiy" : "Open",
+        "jira_exalatedevserhiy" : "In Progress", "ado_exalatedevserhiy" : "In Flight"
       }
     ]
   }

@@ -23,6 +23,10 @@ class AdoIn {
             if (replica.targetProject) {
                 workItem.projectKey = replica.targetProject
             }
+            else {
+                // or use some default
+                workItem.projectKey = "ADO2"
+            }
 
             workItem.typeName = "Task"
         }
