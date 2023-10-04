@@ -33,6 +33,30 @@
           "value": "Project Sync Index Document"
         },
         "key": "project-sync-entity-property"
+      },
+      {
+        "keyConfigurations": [
+          {
+            "extractions": [
+              {
+                "objectName": "connection",
+                "type": "text",
+                "alias": "connection"
+              },
+              {
+                "objectName": "active",
+                "type": "text",
+                "alias": "active"
+              }
+            ],
+            "propertyKey": "sync"
+          }
+        ],
+        "entityType": "issue",
+        "name": {
+          "value": "Issue Sync Index Document"
+        },
+        "key": "issue-sync-entity-property"
       }
     ]
   }
