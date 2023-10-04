@@ -137,9 +137,16 @@ class JiraClient {
                     .url(sanitizedUrl)
                     .withMethod(method)
 
-            if (headers != null && !headers.isEmpty()) {
-                def scalaHeaders = scala.collection.JavaConversions.asScalaBuffer(
-                        headers.entrySet().inject([] as List<scala.Tuple2<String, String>>) { List<scala.Tuple2<String, String>> result, kv ->
+            def isImpersonationHeader = { Map.Entry<String, List<String>> entry ->
+                entry.key == "Authorization" &&
+                        entry.value.any { it.startsWith("ADMIN") }
+            }
+            def internalHeaders = headers.findAll { entry ->
+                !isImpersonationHeader(entry)
+            }
+            if (internalHeaders != null && !internalHeaders.isEmpty()) {
+                def scalaHeaders = scala.collection.JavaConverters.asScalaBuffer(
+                        internalHeaders.entrySet().inject([] as List<scala.Tuple2<String, String>>) { List<scala.Tuple2<String, String>> result, kv ->
                             kv.value.each { v -> result.add(pair(kv.key, v) as scala.Tuple2<String, String>) }
                             result
                         }
@@ -148,7 +155,7 @@ class JiraClient {
             }
 
             if (!allQueryParams.isEmpty()) {
-                def scalaQueryParams = scala.collection.JavaConversions.asScalaBuffer(allQueryParams.entrySet().inject([] as List<scala.Tuple2<String, String>>) { List<scala.Tuple2<String, String>> result, kv ->
+                def scalaQueryParams = scala.collection.JavaConverters.asScalaBuffer(allQueryParams.entrySet().inject([] as List<scala.Tuple2<String, String>>) { List<scala.Tuple2<String, String>> result, kv ->
                     kv.value.each { v -> result.add(pair(kv.key, v) as scala.Tuple2<String, String>) }
                     result
                 })
@@ -160,8 +167,15 @@ class JiraClient {
                 request = request.withBody(body, writable)
             }
 
+            def userOpt = headers.any(isImpersonationHeader) ?
+                    scala.Option$.MODULE$.<String>apply(
+                            headers["Authorization"]
+                                    ?.find{it.startsWith("ADMIN")}
+                                    ?.replace("ADMIN:", "")
+                    ) :
+                    none()
             response = await(await(httpClient.authenticate(
-                    none(),
+                    userOpt,
                     request,
                     gs
             )).execute())
