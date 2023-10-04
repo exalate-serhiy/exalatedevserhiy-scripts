@@ -18,6 +18,7 @@ class SyncProjectPropertyService {
     SyncProjectProperty getSyncProperty(String projectIdOrKey) {
         Map<String, Object> context = syncScriptContextService.syncScriptContext
         def headerValue = context.userAuthorization
+        context.debug("headerValue=$headerValue")
         Map<String, Object> syncProperty = new JiraClient()
                 .http(
                         "GET", "/project/${projectIdOrKey}/property/sync".toString(),

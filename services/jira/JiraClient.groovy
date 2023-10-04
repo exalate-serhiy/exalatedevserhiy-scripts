@@ -167,19 +167,24 @@ class JiraClient {
                 request = request.withBody(body, writable)
             }
 
-            def userOpt = headers.any(isImpersonationHeader) ?
-                    scala.Option$.MODULE$.<String>apply(
-                            headers["Authorization"]
-                                    ?.find{it.startsWith("ADMIN")}
-                                    ?.replace("ADMIN:", "")
-                    ) :
-                    none()
-            InjectorGetter.debug.error("#http $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
-            response = await(await(httpClient.authenticate(
-                    userOpt,
-                    request,
-                    gs
-            )).execute())
+            def hasAdminImpersonation = headers.any(isImpersonationHeader)
+            //InjectorGetter.debug.error("#http $method $sanitizedUrl \n HEADERS: $headers QUERY PARAMS: ${allQueryParams}")
+            if (!hasAdminImpersonation && headers.containsKey("Authorization")) {
+                response = await(request.execute())
+            } else {
+                def userOpt = hasAdminImpersonation ?
+                        scala.Option$.MODULE$.<String>apply(
+                                headers["Authorization"]
+                                        ?.find{it.startsWith("ADMIN")}
+                                        ?.replace("ADMIN:", "")
+                        ) :
+                        none()
+                response = await(await(httpClient.authenticate(
+                        userOpt,
+                        request,
+                        gs
+                )).execute())
+            }
         } catch (Exception e) {
             throw new com.exalate.api.exception.IssueTrackerException("Unable to perform the request $method $path with body: \n```$body```\n, please contact Exalate Support: ".toString() + e.message, e)
         }
