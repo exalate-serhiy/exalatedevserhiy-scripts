@@ -13,6 +13,7 @@ class SyncProjectPropertyService {
 
     SyncProjectPropertyService(SyncScriptContextService syncScriptContextService) {
         this.syncScriptContextService = syncScriptContextService
+        this.jsonSlurper = new JsonSlurper()
     }
 
     SyncProjectProperty getSyncProperty(String projectIdOrKey) {
