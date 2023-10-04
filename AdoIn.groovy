@@ -24,7 +24,7 @@ class AdoIn {
                 workItem.projectKey = replica.targetProject
             }
 
-            workItem.type = "Task"
+            workItem.typeName = "Task"
         }
 
         workItem.description = replica.description
