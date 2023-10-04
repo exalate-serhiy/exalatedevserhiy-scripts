@@ -23,7 +23,9 @@ class SyncProjectPropertyService {
                         "GET", "/project/${projectIdOrKey}/property/sync".toString(),
                         [:],
                         null,
-                        ["Authorization": ["Basic ${("serhiy@exalate.com:"+token).bytes.encodeBase64().toString()}"]]
+                        ["Authorization": [
+                                "Basic ${("serhiy@exalate.com:"+token).bytes.encodeBase64().toString()}".toString()
+                        ]]
                 ) { response ->
                     if (response.code >= 400) throw new com.exalate.api.exception.IssueTrackerException(
                             "Failed to perform GET /project/${projectIdOrKey}/property/sync : ${response.code} ${response.body}".toString()
