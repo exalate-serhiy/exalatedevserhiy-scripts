@@ -139,7 +139,7 @@ class JiraClient {
 
             def isImpersonationHeader = { Map.Entry<String, List<String>> entry ->
                 entry.key == "Authorization" &&
-                        entry.value.any { it.startsWith("ADMIN") }
+                        entry.value.any { it?.startsWith("ADMIN") }
             }
             def internalHeaders = headers.findAll { entry ->
                 !isImpersonationHeader(entry)
