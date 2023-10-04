@@ -1,3 +1,4 @@
+import com.exalate.api.domain.IIssueKey
 import com.exalate.api.domain.connection.IConnection
 import com.exalate.basic.domain.hubobject.v1.BasicHubIssue
 import domain.mappings.Side
@@ -18,6 +19,7 @@ class JiraOut {
         Map<String, Object> context = syncScriptContextService.syncScriptContext
         IConnection connection = context.connection as IConnection
         def nodeHelper = context.nodeHelper
+        IIssueKey issueKey = context.issueKey
         BasicHubIssue issue = context."issue" as BasicHubIssue
         BasicHubIssue replica = context."replica" as BasicHubIssue
         SyncProjectProperty sync = syncProjectPropertyService.getSyncProperty(
