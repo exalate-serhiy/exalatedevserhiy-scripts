@@ -1,0 +1,37 @@
+{
+  "name" : "Sync Project Property in JQL",
+  "key" : "com.exalate.sync_project_property",
+  "description" : "Adds project.property[sync].active = \"true\" and project.property[sync].connection = \"A_to_B\" to JQL",
+  "version" : "0.1.0",
+  "scopes" : ["NONE"],
+  "authentication" : "NONE",
+  "baseUrl" : "https://raw.githubusercontent.com/exalate-serhiy/exalatedevserhiy-scripts/main/",
+  "modules" : {
+    "jiraEntityProperties": [
+      {
+        "keyConfigurations": [
+          {
+            "extractions": [
+              {
+                "objectName": "connection",
+                "type": "text",
+                "alias": "connection"
+              },
+              {
+                "objectName": "active",
+                "type": "text",
+                "alias": "active"
+              }
+            ],
+            "propertyKey": "sync"
+          }
+        ],
+        "entityType": "project",
+        "name": {
+          "value": "Project Sync Index Document"
+        },
+        "key": "project-sync-entity-property"
+      }
+    ]
+  }
+}
