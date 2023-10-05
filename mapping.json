@@ -12,5 +12,13 @@
         "jira_exalatedevserhiy" : "In Progress", "ado_exalatedevserhiy" : "In Flight"
       }
     ]
+  },
+  {
+    "jira_exalatedevserhiy" : {
+      "project" : "BB"
+    },
+    "ado_exalatedevserhiy" : {
+      "project" : "DOPS"
+    }
   }
 ]
